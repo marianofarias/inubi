@@ -1,0 +1,154 @@
+    html, body, #doc, #page-outer {
+        height: 100%;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        background-position: left 40px;
+        background-attachment: fixed;
+        background-repeat: repeat;
+        background-image: url('../img/city_5.jpg');
+    }
+
+    .topbar {
+        position: fixed;
+        overflow: visible;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 40px;
+        z-index: 1000;
+        -webkit-box-shadow: 0 2px 3px 
+        rgba(0, 0, 0, .25);
+        -moz-box-shadow: 0 2px 3px rgba(0,0,0,.25);
+        box-shadow: 0 2px 3px 
+        rgba(0, 0, 0, .25);
+        background-position: 0 0;
+        background-color: #252525;
+        background-image: url('../img/twitter_web_sprite_bgs.png');
+        background-repeat: repeat-x;
+    }
+
+    .topbar h3 a {
+        background: url('../img/logo_1.png') center no-repeat;
+        float: left;
+        display: block;
+        height: 40px;
+        width: 144px;
+        margin: -18px 0 0 -15px;
+        text-indent: -100000px;
+    }
+
+    .form-search {
+        width: 202px;
+        height: 26px;
+        float: right;
+        margin: -10px 10px 0 0;
+    }
+
+    .search-input {
+        position: relative;
+        width: 200px;
+        top: 0;
+        right: 0;
+        z-index: 2;
+        color: #444;
+    }
+
+    .login-facebook {
+        float: right;
+        margin: -8px 10px 0 0;
+    }
+
+    .fb-like {
+        float: right;
+        margin: -8px 0 0 0;
+    }
+
+    i {
+        display: inline-block;
+        zoom: 1;
+        vertical-align: text-top;
+        background-image: url('../img/iconoCentro.png');
+        background-repeat: no-repeat;
+    }
+
+    .larry-topbar {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -14px;
+        width: 28px;
+        height: 28px;
+        margin-top: 5px;
+    }
+
+    .wrapper, .wrapper-narrow, .wrapper-permalink {
+        position: relative;
+        padding-bottom: 0;
+        width: 960px;
+        min-height: 100%;
+        padding: 54px 14px 15px;
+        margin: 0 auto;
+        background: url('../img/wash-white-30.png');
+        display: table;
+    }
+
+    .dashboard {
+        float: right;
+        width: 330px;
+    }
+
+    .content-main {
+        float: left;
+        width: 610px;
+        min-height: 100%;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+    }
+
+    .module {
+        text-shadow: 0 1px 0 white;
+        border: 1px solid #CFCFCF;
+        background-color: rgba(250, 250, 250, .9);
+        position: fixed;
+        line-height: 16px;
+        -webkit-border-radius: 6px;
+        -moz-border-radius: 6px;
+        border-radius: 6px;
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+        padding: 0px 5px 0px 5px;
+    }
+
+    .component-map {
+        position: relative;
+        width: 100%;
+        height: 380px;
+        margin-bottom: 15px;
+    }
+
+    .component-datos {
+        position: relative;
+        width: 100%;
+        height: 99%;
+    }            
+
+    .component-login {
+        position: relative;
+        width: 255px;
+        height: 110px;
+        margin: 0px 0px 15px 0px;
+    }
+
+    .component-resumen {
+        position: relative;
+        width: 255px;
+        height: 250px;
+        margin: 0px 0px 15px 0px;
+    }    
+
+    .component-otros {
+        position: relative;
+        width: 255px;
+        height: 100%;
+    }        

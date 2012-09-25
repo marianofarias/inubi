@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>inubi</title>
+    <link rel="shortcut icon" href="img/favicon2.png">
+    <meta charset="utf-8">
+    <meta name="description" content="Pruebas para Inubi 1.0">
+    <meta name="author" content="German Peraferrer">
+    
+    <!-- API Facebook -->
+    <script src="//connect.facebook.net/es_ES/all.js"></script>
+
+    <!-- API jQuery -->
+    <script src="libs/jQuery/jquery-1.7.2.min.js"></script>
+    <script src="libs/jQuery/jquery.tmpl.min.js"></script>
+
+    <!-- Normalize CSS -->
+    <link href="libs/normalize/normalize.css" rel="stylesheet">
+    
+    <!-- API Bootstrap Twitter -->
+    <script src="libs/bootstrap/js/bootstrap.js"></script>
+    <link href="libs/bootstrap/css/bootstrap-inubi.css" rel="stylesheet">
+    <link href="libs/bootstrap/css/docs.css" rel="stylesheet">
+
+    <!-- API Google Maps -->
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCivybrubbAPomcxkyxgnOoE9FRvjWCZLI&sensor=true"></script>
+
+    <!-- API Socket.io -->
+    <script src="libs/socket.io-client/socket.io.js"></script>
+    
+    <!-- CSS Inubi -->
+    <link href="css/inubi-1.0.0.css" rel="stylesheet">
+
+    <!-- JS Inubi -->
+    <script src="js/inubi.scroll-1.0.0.js"></script>
+    <script src="js/gmap-1.0.0.js"></script>
+    <script src="js/fb-1.0.0.js"></script>
+    <script src="js/inubi.io-1.0.0.js"></script>
+    <script src="js/inubi-1.0.0.js"></script>
+    
+  </head>
+  
+  <body data-spy="scroll" data-target=".subnav" data-offset="50" data-twttr-rendered="true">
+
+    <!-- Top Bar - Barra de menu superior estatica -->
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+
+          <!-- Logo -->
+          <a class="brand iub-logo" href="#"></a>
+          
+          <div class="nav pull-left">
+            <!-- Search -->
+            <form class="navbar-search pull-left">
+              <input id="buscar" type="text" class="search-query span3" placeholder="Buscar aplausos, mejoras, comercios ...">
+            </form>
+
+            <!-- Filtros Busqueda -->
+            
+            <!-- Filtros Inubis -->
+            <div class="iub-filtro-search-inubi">
+              <div class="btn-group iub-float-left" data-toggle="buttons-checkbox">
+                <button class="btn btn-small btn-action" rel="btnTipoInubi" title="Aplausos"><i class="icon-thumbs-up"></i></button>
+                <button class="btn btn-small btn-action" rel="btnTipoInubi" title="Mejoras"><i class="icon-flag"></i></button>
+                <button class="btn btn-small btn-action" rel="btnTipoInubi" title="Eventos"><i class="icon-glass"></i></button>
+                <button class="btn btn-small btn-action" rel="btnTipoInubi" title="Avisos"><i class="icon-tag"></i></button>
+                <button class="btn btn-small btn-action" rel="btnTipoInubi" title="Espontaneas"><i class="icon-bullhorn"></i></button>
+              </div>   
+              <input type="checkbox" title="Seleccionar todos los tipos de Inubis" class="iub-filtro-search-checkbox" onclick="checkTipoInubi(this)">
+            </div>
+            
+            <!-- Filtros Entidades -->
+            <div class="iub-filtro-search-inubi">
+              <div class="btn-group iub-float-left" data-toggle="buttons-checkbox">
+                <button class="btn btn-small btn-action" rel="btnTipoEntidad" title="Personas"><i class="icon-user"></i></button>
+                <button class="btn btn-small btn-action" rel="btnTipoEntidad" title="Entidades - Comercios - Profesionales"><i class="icon-home"></i></button>
+              </div>              
+              <input type="checkbox" title="Seleccionar todos los tipos" class="iub-filtro-search-checkbox" onclick="checkTipoEntidad(this)">
+            </div>
+
+          </div>
+
+          <div class="nav pull-right">
+            <button id="btnSugerencia" class="btn btn-mini btn-action iub-btn-sugenrencia" rel="popover" data-content="" data-original-title="Dejanos tu sugerencia">Sugerencias</button>
+            <span id="miNombre" class="navbar-text">Nombre de Usuario</span>
+            <img id="fotoPerfil" class="iub-imagen-perfil iub-border-shadow"/>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenedor Principal -->
+    <div class="container">
+      <div class="row">
+        
+        <!-- Contenedor Lateral Izquierdo -->
+        <div id="panelLeftFixedPadre" class="span3">
+          
+          <!-- Panel de Usuario -->
+          <div id="panelUsuario" class="iub-panel-usuario">
+            <div class="iub-panel-usuario-header">
+              <img id="fotoPerfilLeft" class="iub-imagen-perfil-left iub-border-shadow"/>
+              <a id="miNombreLeft" href="#" class="navbar-text iub-font-bold">Nombre de Usuario</a>
+              <a id="btnAddInubi" href="#" class="btn btn-small btn-warning iub-float-right" rel="popover" data-content="" data-original-title="Que vas a publicar"><i class="icon-plus-sign icon-white"></i></a>
+            </div>
+
+            <!-- Tabs dek Panel Usuario -->
+            <ul class="nav nav-tabs" id="myTab">
+              <li class="active"><a href="#miEstado" title="Estado de mis Inubis" data-toggle="tab"><i class="icon-th-large"></i></a></li>
+              <li><a id="tabAmigos" href="#misAmigos" title="Mis Amigos" data-toggle="tab"><i class="icon-user"></i><span class="badge">0</span></a></li>
+              <li><a id="tabNoticias" href="#misNoticias" title="Comentarios y Me Gusta que han realizado sobre mis Inubis" data-toggle="tab"><i class="icon-globe"></i> <span class="badge badge-important">2</span></a></li>
+            </ul>
+
+            <!-- Contenedor de los Tabs del Panel de Usuario -->
+            <div class="tab-content">
+              <div id="miEstado" class="tab-pane active iub-border-solid-gray">
+                <p><a href="#"><i class="icon-thumbs-up"></i> Aplausos</a><span class="badge badge-info iub-float-right">26</span></p>
+                <p><a href="#"><i class="icon-flag"></i> Mejoras</a><span class="badge badge-info iub-float-right">7</span></p>
+                <p><a href="#"><i class="icon-glass"></i> Eventos</a><span class="badge badge-info iub-float-right">2</span></p>
+                <p><a href="#"><i class="icon-tag"></i> Avisos</a><span class="badge badge-info iub-float-right">3</span></p>
+                <p><a href="#"><i class="icon-bullhorn"></i> Espontaneas</a><span class="badge badge-info iub-float-right">0</span></p>
+              </div>
+
+              <div id="misAmigos" class="tab-pane iub-tab-pane-scroll">
+                <p>Actividad de mis amigos de facebook dentro de Inubi.</p>
+              </div>
+
+              <div id="misNoticias" class="tab-pane iub-tab-pane-scroll">
+                <p>Comentarios y Me Gusta que la gente a realizado sobre mis Inubis.</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Panel Fijo Izquierdo, al hacer scroll el contenido se queda inmobilizado -->
+          <div id="panelLeftFixed">
+
+            <div id="topFive" class="breadcrumb  iub-border-shadow iub-panel-fixed-height-200">
+              <p>Top 10 !!!</p>
+            </div>
+
+            <div id="topFive" class="breadcrumb  iub-border-shadow iub-panel-fixed-height-200">
+              <p>Avisos Destacados !!!</p>
+            </div>
+
+          </div>
+
+        </div>
+        
+        <!-- Contenedor Central Principal WALL -->
+        <div class="span6">
+          
+          <!-- Barra Fija de Localidades -->
+          <div id="filtros" class="subnav iub-border-shadow iub-panel-fixed-height-38">
+            
+            <div id="miLocalidad" class="iub-input-localidad">
+              <input id="inLocalidad" type="text" class="search-input span4 iub-input-localidad input" data-provide="typeahead" placeholder="localidad ...">
+            </div>
+
+            <div id="otraCosa" class="iub-buttons-localidad">
+              <button class="btn btn-small btn-action" type="button" title="Mi Ubicación" onclick="initializeGoogleMaps()"><i class="icon-screenshot"></i></button>
+              <button id="btnShowMapa" class="btn btn-small btn-action" type="button" title="Ocultar el Mapa" onclick="showMapa()"><i class="icon-chevron-up"></i></button>
+            </div>
+
+          </div>
+
+          <!-- Crear Nuevo Inubi -->
+          <div id="panelAddInubi" class="iub-border-shadow hide iub-add-inubi">
+            
+            <div id="panelAddInubiContent" class="iub-add-inubi-content">
+              <button class="close iub-add-inubi-button-close" onclick="$('#panelAddInubi').fadeOut(1000)">&times;</button>
+              <form>
+                <select>
+                  <option>Acción</option>
+                </select>
+                <select>
+                  <option>Motivos</option>
+                </select>
+                <textarea class="iub-add-inubi-descripcion" placeholder="exprese aquí lo que desea publicar ..."></textarea>
+                <input type="text" placeholder="calle y altura ...">
+                
+                <div class="btn-group iub-float-right" data-toggle="buttons-radio">
+                  <button type="button" class="btn btn-small btn-info active" title="Permite especificar la Dirección exacta del Inubi a crear.">Dirección</button>
+                  <button type="button" class="btn btn-small btn-info" title="Permite seleccionar la Entidad a la cual le va a crear un Inubi">Entidad</button>
+                </div>                
+              </form>
+            </div>
+
+            <div class="iub-add-inubi-footer">
+              <button id="btnAddImagen" class="btn btn-small btn-action" type="button" title="Agregar una Imagen" onclick=""><i class="icon-camera"></i></button>
+              <span id="fileImagen">Nombre del archivo que va a subir ...</span>
+              <button id="btnPublicar" class="btn btn-small btn-primary iub-float-right" type="button" onclick="$('#panelAddInubi').fadeOut(1000)">Publicar</button>
+            </div>
+            
+          </div>
+
+          <!-- Mensaje de Alerta -->
+          <div id="msgError" class="alert alert-block alert-error fade in hide"></div>
+          <div id="msgOk" class="alert alert-block alert-action fade in hide"></div>
+          <div id="msgInfo" class="alert alert-block alert-action fade in hide"></div>
+
+          <!-- Contenedor del Mapa -->
+          <div class="iub-position-relative">
+            
+            <!-- Contenedor del Mapa utilizado por Gmap -->
+            <div id="map_canvas" class="iub-mapa iub-border-shadow">
+            </div>
+          </div>
+
+          <!-- Panel de Resultados, todo la info se muestra aquí dentro -->
+          <div id="contentResultados" class="">
+            <h5>Resultados de la Busqueda</h5><hr>
+          </div>
+        </div>
+        
+        <!-- Contenedor Lateral Derecho -->
+        <div id="panelRightFixedPadre" class="span3">
+
+          <div id="panelNovedades" class="iub-panel-novedades">
+          </div>
+
+          <div id="panelRightFixed">
+            <div class="breadcrumb  iub-border-shadow iub-panel-fixed-height-450">
+              <p>Proximos Eventos !!!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pie del Sitio -->
+      <div class="row ">
+        <div class="span12">
+          <p><img src="img/logoInubi.png"/> Eslogan !!! daaaaaaale ...</p>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Componentes no Visualez HTML, generalmente invocados para ser visualizados -->
+
+    <!-- Popover Crear Inubi -->
+    <div id="btnInubis" class="hide iub-padding-5">
+      <button class="btn btn-small btn-primary" type="button" title="Aplauso" onclick="showAddInubi()"><i class="icon-thumbs-up icon-white"></i></button>
+      <button class="btn btn-small btn-primary" type="button" title="Mejora" onclick="showAddInubi()"><i class="icon-flag icon-white"></i></button>
+      <button class="btn btn-small btn-primary" type="button" title="Evento" onclick="showAddInubi()"><i class="icon-glass icon-white"></i></button>
+      <button class="btn btn-small btn-primary" type="button" title="Aviso" onclick="showAddInubi()"><i class="icon-tag icon-white"></i></button>
+      <button class="btn btn-small btn-primary" type="button" title="Espontanea" onclick="showAddInubi()"><i class="icon-bullhorn icon-white"></i></button>
+      <div class="iub-popover-add-inubi-descripcion">
+        <p class="iub-popover-add-inubi-p" >Descripción general de lo que esto permite hacer, cuando pasamos el mouse sobre alguno de los iconos cambia y nos indica que hace cada uno en particular.</p>
+      </div>
+    </div>
+
+    <!-- Popover Crear Sugerencia -->
+    <div id="contentSugerencia" class="hide">
+      <p class="iub-sugerencia-p" >Podes sugerir mejoras, cambios o nuevas funcionalidades, tu participación nos interesa.</p>
+      <textarea id="inSugerencia" name="inSugerencia" rows="5" placeholder="Dejanos tu sugerencia ..." class="iub-resize-none"></textarea>
+      <div class="iub-sugerencia-footer">
+        <button id="btnSendSugerencia" class="btn btn-mini btn-primary iub-float-right" type="button" onclick="sendSugerencia()">Enviar</button>
+      </div>
+    </div>
+    
+  </body>
+  
+</html>
