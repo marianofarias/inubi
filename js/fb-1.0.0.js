@@ -7,7 +7,7 @@ function fbInit() {
     appId      : '221677534601882',
     status     : true, // check login status
     cookie     : true, // enable cookies to allow the server to access the session
-    xfbml      : true  // parse XFBML
+    xfbml      : true // parse XFBML
   });
 
   FB.Event.subscribe('auth.login',
@@ -53,10 +53,10 @@ function quienSoy() {
     }
 
     FB.api('/me/picture', function(response) {
-      $('#fotoPerfil').attr('src', response);
-      $('#fotoPerfilLeft').attr('src', response);
-
-      miFB.picture = response;
+      $('#fotoPerfil').attr('src', response.data.url);
+      $('#fotoPerfilLeft').attr('src', response.data.url);
+      
+      miFB.picture = response.data.url;
 
       // Avisamos al Node quien es el usuario de FB que esta usando el socket
       socket.emit('setNickName', miFB);
@@ -70,7 +70,7 @@ function quienSoy() {
       $.each(response.data, function(i, val) {
         FB.api('/'+val.id+'/picture', function(response) {
           //console.log(response);
-          $('#misAmigos').append('<p><img src="'+response+'" class="iub-imagen-perfil-left iub-border-shadow"/><a href="#">'+val.name+'</a></p>');
+          $('#misAmigos').append('<p><img src="'+response.data.url+'" class="iub-imagen-perfil-left iub-border-shadow"/><a href="#">'+val.name+'</a></p>');
         });
         //console.log(val.name);
       });
