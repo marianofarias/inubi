@@ -23,13 +23,49 @@ function fbInit() {
     }
   );
 
+  FB.Event.subscribe('auth.authResponseChange', function(response) {
+    console.log('FB cambio el estado de su session: ' + response.status);
+    
+    if (response.status == 'connected') {
+
+      // Actualizamos los compenentes visuales
+      $('#panelUsuario').slideDown(800);
+      $('#btnLogin').html('<span class="iub-f-facebook">f</span>Salir');
+      $('#btnLogin').attr('name', 'salir');
+      $('#btnLogin').tooltip('hide')
+          .attr('data-original-title', 'Cerrar Sesion')
+          .tooltip('fixTitle');
+
+      FB.api('/me/permissions', function(response) {
+        var permisos = response.data[0];
+
+        // Verificamos si posee los permisos necesarios
+        if (permisos.email && permisos.installed && permisos.publish_stream) {
+          console.log('OK - Permisos');
+        } else {
+          console.log('ERROR - Permisos - Salimos de Inubi');
+          FB.logout(function(response) {});
+        }
+
+      });
+    } else {
+      // Actualizamos los compenentes visuales
+      $('#panelUsuario').slideUp();
+      $('#btnLogin').html('<span class="iub-f-facebook">f</span>Ingresar');
+      $('#btnLogin').attr('name', 'ingresar');
+      $('#btnLogin').tooltip('hide')
+          .attr('data-original-title', 'Iniciar Session con tu usuarios de Facebook')
+          .tooltip('fixTitle');
+    }
+
+  });
+
   FB.getLoginStatus(function(response) {
     if (response.status == "connected") {
-      $('#optLogin').text('Cerrar Sesión');
       quienSoy();
     } else {
       console.log('No estas conectado a Facebook');
-      FBLogin();
+//      fbLogin();
     }
   });
 
@@ -43,8 +79,6 @@ function quienSoy() {
   FB.api('/me', function(response) {
     miFB = response;
 
-    $('#miNombre').text(' '+response.name);
-
     // Verificamos si se trata de un usuario que valido su cuenta en Facebook o no
     if (miFB.verified) {
       $('#miNombreLeft').html(' '+response.name+' <i class="icon-check" title="Usuario Validado en Facebook"></i>');
@@ -53,7 +87,6 @@ function quienSoy() {
     }
 
     FB.api('/me/picture', function(response) {
-      $('#fotoPerfil').attr('src', response.data.url);
       $('#fotoPerfilLeft').attr('src', response.data.url);
       
       miFB.picture = response.data.url;
@@ -79,7 +112,7 @@ function quienSoy() {
   });
 }
 
-function FBLogin() {
+function fbLogin() {
   FB.login(function(response) {
      if (response.authResponse) {
        console.log('Entro !!!');
@@ -87,5 +120,9 @@ function FBLogin() {
      } else {
        console.log('Ouch !!!');
      }
-   });
+   }, {scope: 'email, user_location, publish_stream'});
+}
+
+function fbLogout() {
+  FB.logout(function(response){});
 }

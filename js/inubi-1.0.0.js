@@ -21,6 +21,18 @@ $(document).ready(function() {
   $('#inLocalidad').change(function(event){
     positionMapaLocalidad($('#inLocalidad').val());
   });
+
+  $('#panelUsuario').hide();
+
+  $('#btnLogin').tooltip({placement: 'bottom'});
+  $('#btnLogin').on('click', function(event) {
+    console.log('click');
+    if ($('#btnLogin').attr('name') == 'salir') {
+      fbLogout();
+    } else {
+      fbLogin()
+    }
+  });
   
   // Maneja el Scroll definido en js/inubi.scroll-x.x.x.js
   scrollInit();
@@ -100,3 +112,4 @@ function sendSugerencia() {
   socket.emit('setSugerencia', $('#inSugerencia').val());
   $('#btnSugerencia').popover('hide');
 }
+

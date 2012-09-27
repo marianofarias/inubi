@@ -22,6 +22,21 @@ a:hover {
   text-decoration: none;
 }
 
+@font-face{
+  font-family: "Wolf Sans";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/Wolf Sans Regular.ttf");
+}
+
+.iub-f-facebook {
+  font-family: "Wolf Sans";
+  font-size: 16px;
+  padding: 0 10px 0 5px;
+  margin-right: 10px;
+  border-right: 1px dotted #08519c;
+}
+
 .popover {
   width: 215px;
 }
@@ -64,6 +79,10 @@ a:hover {
 
 .iub-panel-usuario {
   padding-bottom: 15px;
+}
+
+.iub-contenedor-panel-usuario {
+  padding: 1px 0 0 0;
 }
 
 .iub-panel-usuario-header {
@@ -178,6 +197,10 @@ a:hover {
 
 .iub-padding-5 {
   padding: 5px;
+}
+
+.iub-padding-top-3 {
+  padding-top: 3px;
 }
 
 .iub-position-relative {

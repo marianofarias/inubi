@@ -40,6 +40,7 @@ function scrollInit() {
 
   function processScroll() {
     var i, scrollTop = $win.scrollTop();
+    var altoPanelUsuario = 0;
 
     $('#btnAddInubi').popover('hide');
 
@@ -52,8 +53,15 @@ function scrollInit() {
       $('#panelRightFixed').css('position', 'static');
     }
 
+    // Verificamos si el panel de usuario esta visible o no para cambiar la referencia del scroll
+    if ($('#panelUsuario').css('display') == 'none') {
+      altoPanelUsuario = navTop;
+    } else {
+      altoPanelUsuario = $('#panelUsuario').height();
+    }
+
     // Controlamos si queda o no fija la Oferta
-    if (scrollTop > $('#panelUsuario').height()) {
+    if (scrollTop > altoPanelUsuario) {
       $('#panelLeftFixed').css('top', '100px');
       $('#panelLeftFixed').css('position', 'fixed');
     } else {
