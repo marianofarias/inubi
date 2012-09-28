@@ -32,7 +32,10 @@ $(document).ready(function() {
       fbLogin()
     }
   });
-  
+
+  $('#chkTipoInubi').tooltip({placement: 'bottom'});
+  $('#chkTipoEntidad').tooltip({placement: 'bottom'});
+
   // Maneja el Scroll definido en js/inubi.scroll-x.x.x.js
   scrollInit();
 
@@ -156,3 +159,12 @@ function hidePanelUsuario() {
       .attr('data-original-title', 'Iniciar Session con tu usuarios de Facebook')
       .tooltip('fixTitle');
 }
+
+function showAccionesAmigos(elemnt) {
+  // Verificamos si las acciones estan ocultas para asi mostrarlas
+  if ($($($(elemnt).children().get(1)).children().get(1)).css('display') == 'none') {
+    $('div[name="acciones"]').hide();
+    $($($(elemnt).children().get(1)).children().get(1)).show();
+  }
+}
+
