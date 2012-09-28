@@ -26,7 +26,6 @@ $(document).ready(function() {
 
   $('#btnLogin').tooltip({placement: 'bottom'});
   $('#btnLogin').on('click', function(event) {
-    console.log('click');
     if ($('#btnLogin').attr('name') == 'salir') {
       fbLogout();
     } else {
@@ -49,12 +48,18 @@ $(document).ready(function() {
  * Funciones Inubi
  */
 
+/**
+ * Muestra el panel que permite comenzar a ingresar un Inubi
+ */
 function showAddInubi() {
   $('#panelAddInubi').fadeIn(1000);
   $('#btnAddInubi').popover('hide');
 //  $('#myModal').modal();
 }
 
+/**
+ * Muestra u Oculta el Mapa de la pantalla principal
+ */
 function showMapa() {
   if ($('#btnShowMapa i').hasClass('icon-chevron-up')) {
     $('#map_canvas').fadeOut(1000);
@@ -69,6 +74,9 @@ function showMapa() {
   }
 }
 
+/**
+ * Selecciona o deselecciona los botones Tipo de Inubi de filtros para la busqueda del nav top
+ */
 function checkTipoInubi(chk) {
   if (!chk.checked) {
     $('button[rel="btnTipoInubi"]').removeClass('active');
@@ -77,6 +85,9 @@ function checkTipoInubi(chk) {
   }
 }
 
+/**
+ * Selecciona o deselecciona los botones Tipos de Entidad de filtros para la busqueda del nav top
+ */
 function checkTipoEntidad(chk) {
   if (!chk.checked) {
     $('button[rel="btnTipoEntidad"]').removeClass('active');
@@ -85,6 +96,9 @@ function checkTipoEntidad(chk) {
   }
 }
 
+/**
+ * Centra en el Mapa la localidad que seleccionamos
+ */
 function positionMapaLocalidad(localidad) {
   socket.emit('getLocalidad', {localidad: localidad}, function(data){
     var myPosition = new google.maps.LatLng(data[0].latitud, data[0].longitud);
@@ -103,13 +117,42 @@ function positionMapaLocalidad(localidad) {
   
 }
 
+/**
+ * Muestra en el Mapa la localidad que seleccionamos desde la lista de Novedades
+ */
 function novedadLocalidad(localidad){
   $('#inLocalidad').val(localidad);
   positionMapaLocalidad($('#inLocalidad').val() );
 }
 
+/**
+ * Enviar una sugerencia al equipo de Inubi
+ */
 function sendSugerencia() {
   socket.emit('setSugerencia', $('#inSugerencia').val());
   $('#btnSugerencia').popover('hide');
 }
 
+/**
+ * Mostrar el Panel de Usuario, utilizado luego de la validación de usuario FB
+ */
+function showPanelUsuario() {
+  $('#panelUsuario').slideDown(800);
+  $('#btnLogin').html('<span class="iub-f-facebook">f</span>Salir');
+  $('#btnLogin').attr('name', 'salir');
+  $('#btnLogin').tooltip('hide')
+      .attr('data-original-title', 'Cerrar Sesion')
+      .tooltip('fixTitle');
+}
+
+/**
+ * Oculta el Panel de Usuario, utilizado en la validación de usuario FB
+ */
+function hidePanelUsuario() {
+  $('#panelUsuario').slideUp();
+  $('#btnLogin').html('<span class="iub-f-facebook">f</span>Ingresar');
+  $('#btnLogin').attr('name', 'ingresar');
+  $('#btnLogin').tooltip('hide')
+      .attr('data-original-title', 'Iniciar Session con tu usuarios de Facebook')
+      .tooltip('fixTitle');
+}
