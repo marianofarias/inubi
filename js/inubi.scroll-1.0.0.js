@@ -7,7 +7,7 @@ function scrollInit() {
   /**
    * Modo de Prueba
    */
-  var arrResult = [
+  var arrResult2 = [
     {Nombre: 'Pedro', Apellido: 'Prueba', Edad: 15},
     {Nombre: 'Alberto', Apellido: 'Molinarolli', Edad: 15},
     {Nombre: 'German', Apellido: 'Peraferrer', Edad: 15},
@@ -17,9 +17,20 @@ function scrollInit() {
     {Nombre: 'Guadalupe', Apellido: 'Rivera', Edad: 15},
     {Nombre: 'Gustavo', Apellido: 'Nesa', Edad: 15}
   ];
+  
+   var arrResult = [
+    {Nombre: 'Pedro', Apellido: 'Perez', Accion: 'Mejora', Motivo: 'Iluminación', Geolocalizacion: 'Libertad 1524', Descripcion: 'Solicito reposicion de luz de calle', Date: '01/09/2012' , NroLike: '4'},
+    {Nombre: 'Alberto', Apellido: 'Molinarolli',  Accion: 'Aplauso', Motivo: 'Espacio Público', Geolocalizacion: 'Lara y Florida', Descripcion: 'Que buena quedo la plaza!', Date: '20/07/2012', NroLike: ''},
+    {Nombre: 'German', Apellido: 'Peraferrer',  Accion: 'Evento', Motivo: 'Deportivo', Geolocalizacion: 'Uruguay y San Juan', Descripcion: 'Cañuelas enfrenta a Riestra en el estadio Arin', Date: '05/09/2012', NroLike: '1'},
+    {Nombre: 'Mariano', Apellido: 'Farias',  Accion: 'Aviso', Motivo: 'Alquiler', Geolocalizacion: 'Del Carmen 524', Descripcion: 'Alquilo depto 2 ambientes, comunicarse al 02226-15520848', Date: '25/08/2012', NroLike: ''},
+    {Nombre: 'Veronica', Apellido: 'Lera',  Accion: 'Aplauso', Motivo: 'Barrido y Limpieza', Geolocalizacion: 'Basavilbaso 782', Descripcion: 'Que rapides para limpiar los restos del temporal!', Date: '20/08/2012', NroLike: '25'},
+    {Nombre: 'Matias', Apellido: 'Garavaglia',  Accion: 'Mejora', Motivo: 'Semaforo', Geolocalizacion: 'Juarez y Basavilbaso', Descripcion: 'Los semaforos de esa esquina no estan funcionando', Date: '10/08/2012', NroLike: '10'},
+    {Nombre: 'Guadalupe', Apellido: 'Rivera',  Accion: 'Aviso', Motivo: 'Encontrado', Geolocalizacion: 'San Vicente y San Martin', Descripcion: 'ENcontre un perro de razza, si alguien lo perdio por esa zona. contactarme.', Date: '16/08/2012', NroLike: '2'},
+    {Nombre: 'Gustavo', Apellido: 'Nesa',  Accion: 'Mejora', Motivo: 'Lomo de Burro', Geolocalizacion: 'Libertad y Castelli', Descripcion: 'Por esa esquina pasan los autos muy rapido. Se podria poner un lomo de burro no?', Date: '11/08/2012', NroLike: '7'}
+  ];
 
   // Invocar template JQuery Externo
-  $.get('tmpl/ItemResultSearch.tpl', function(template){
+  $.get('tmpl/ItemResultSearch_1.tpl', function(template){
     $(template).tmpl(arrResult).appendTo('#contentResultados');
   });
 
@@ -87,7 +98,7 @@ function scrollInit() {
     } else if (scrollTop == $(document).height() - $win.height()) {
   //      $('#contentResultados').append('<div style="border-bottom: 1px solid #ccc; min-height: 60px; padding: 5px;"><div style="float: left"><img class="inubiBorderShadow" src="img/user.png" /></div><div style="padding-left: 10px; float: left"><p>Algun texto</p><p>Algun texto</p></div></div>');
       // Invocar template JQuery Externo
-      $.get('tmpl/ItemResultSearch.tpl', function(template){
+      $.get('tmpl/ItemResultSearch_1.tpl', function(template){
         $(template).tmpl(arrResult).appendTo('#contentResultados');
       });
     }
