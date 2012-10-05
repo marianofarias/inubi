@@ -246,32 +246,33 @@ a:hover {
   cursor: pointer;
 }
 
-.iub-item-Result-Search{
+.iub-item-result-search{
   border-bottom: 1px solid #ccc; 
   min-height: 60px; 
   padding: 5px;  
 }
 
-.iub-item-Result-Search-Head{
+.iub-item-result-search-head{
   min-height: 60px; 
   padding: 5px; 
   line-height: 10px;
 }
 
-.iub-item-Result-Search-Like{
+.iub-item-result-search-like{
   float: right; 
 }
 
-.iub-item-Result-Search-Title{
+.iub-item-result-search-title{
   padding-left: 10px; 
   float: left;
 }
 
-.iub-item-Result-Search-Body{
+.iub-item-result-search-body{
   line-height: 20px;
+ 
 }
 
-.iub-item-Result-Search-Date{
+.iub-item-result-search-date{
   font-size: 11px;
 }
 
